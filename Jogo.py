@@ -24,12 +24,18 @@ except pygame.error:
 
 janela.blit(background,[0,0])
 
+clock = pygame.time.Clock()
+FPS = 60
+
 pygame.display.flip()
 
 #Game Loop
 game_on = True
 
 while game_on:
+
+    clock.tick(FPS)
+
     eventos = pygame.event.get()
     for evento in eventos:
         if evento.type == pygame.QUIT:
