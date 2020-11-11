@@ -5,39 +5,43 @@
 import pygame
 import sys
 import os
+from classes import *
 
-pygame.init()
 
 WIDTH = 1200
 HEIGHT = 800
 
-janela = pygame.display.set_mode([WIDTH,HEIGHT])
 
-BACKGROUND = os.path.join('Assets','Images','BG_02.png')
+# Função principal do jogo
+def main():
+    pygame.init() # inicialização padrão
+
+    janela = pygame.display.set_mode([WIDTH,HEIGHT]) # define uma surface ("janela" que o jogo será exibido)
+
+    pygame.display.set_caption("Nome do Jogo") # define um nome para a janela aberta
+
+    background = Background() # cria o background usando a class Background (está no arquivo "classes")
+
+    clock = pygame.time.Clock()
+    FPS = 60
+    # Game Loop
+    game_on = True
+    while game_on:
+
+        delta_time = clock.tick(FPS) # garante um FPS máximo
+
+        eventos = pygame.event.get()
+        for evento in eventos:
+            if evento.type == pygame.QUIT:
+                pygame.quit()
+                game_on = False
 
 
-try:
-    background = pygame.image.load(BACKGROUND).convert()
-except pygame.error:
-    print('Problema no load da imagem')
-    sys.exit()
+        background.uptade(delta_time)
+        background.render(janela)
 
-janela.blit(background,[0,0])
 
-clock = pygame.time.Clock()
-FPS = 60
+        pygame.display.flip()
 
-pygame.display.flip()
-
-#Game Loop
-game_on = True
-
-while game_on:
-
-    clock.tick(FPS)
-
-    eventos = pygame.event.get()
-    for evento in eventos:
-        if evento.type == pygame.QUIT:
-            pygame.quit()
-            game_on = False
+if __name__ == '__main__':
+    main()
