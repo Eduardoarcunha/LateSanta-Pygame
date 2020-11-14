@@ -38,6 +38,10 @@ def main():
 
         pygame.time.delay(20)
         delta_time = clock.tick(FPS) # garante um FPS máximo
+        background.uptade(delta_time)
+        background.render(janela)
+        pygame.display.flip()
+
         pygame.draw.rect(janela, (0,0,0), (x, y, largura, altura)) # retangulo que pula
         pygame.display.update()
         eventos = pygame.event.get()
@@ -56,7 +60,7 @@ def main():
         if not pulando:
             if key[pygame.K_SPACE]:
                 pulando = True
-            
+
         else:
             if salto >= -10:
                 neg = 1
@@ -64,13 +68,10 @@ def main():
                     neg = -1
                 y -= (salto**2) * 0.5 * neg
                 salto -= 1
-            else: 
+            else:
                 pulando = False
                 salto = 10
-        
-        background.uptade(delta_time)
-        background.render(janela)
-        pygame.display.flip()
+
 
 if __name__ == '__main__':
     main()
