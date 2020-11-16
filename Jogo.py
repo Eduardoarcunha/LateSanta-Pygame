@@ -11,6 +11,13 @@ from classes import *
 WIDTH = 1100
 HEIGHT = 760
 
+GRAVITY = 5
+
+
+#Estados possíveis
+STILL = 0
+WALKING = 1
+
 # Inicialização padrão
 pygame.init() 
 janela = pygame.display.set_mode([WIDTH,HEIGHT]) # define uma surface ("janela" que o jogo será exibido)
@@ -20,17 +27,19 @@ pygame.display.set_caption("Late Santa") # define um nome para a janela aberta
 # Função principal do jogo
 def main():
     background = Background() # cria o background usando a class Background (está no arquivo "classes")
-
     clock = pygame.time.Clock()
     FPS = 60
 
-    x = 80
-    y = 600
-    largura = 40
-    altura = 60
     pulando = False
-    salto = 10
-    vel = 10
+    salto = 5
+
+    #Carrega o player sheet e cria a sprite do Santa
+    player_sheet = pygame.image.load(os.path.join('Assets','Images','Santa-light.png')).convert_alpha()
+    santa = Santa(player_sheet)
+
+    # Cria um grupo de todos os sprites e adiciona o jogador.
+    all_sprites = pygame.sprite.Group()
+    all_sprites.add(santa)
 
     # Game Loop
     game_on = True
@@ -40,37 +49,44 @@ def main():
         delta_time = clock.tick(FPS) # garante um FPS máximo
         background.uptade(delta_time)
         background.render(janela)
+        all_sprites.draw(janela)
         pygame.display.flip()
-
-        pygame.draw.rect(janela, (0,0,0), (x, y, largura, altura)) # retangulo que pula
         pygame.display.update()
         eventos = pygame.event.get()
+
 
         for evento in eventos:
             if evento.type == pygame.QUIT:
                 pygame.quit()
                 game_on = False
 
-        key = pygame.key.get_pressed()
+            key = pygame.key.get_pressed()
 
-        if key[pygame.K_LEFT] and x > vel:
-            x -= vel
-        if key[pygame.K_RIGHT] and x < y - largura - vel:
-            x += vel
-        if not pulando:
-            if key[pygame.K_SPACE]:
-                pulando = True
+            if evento.type == pygame.KEYDOWN:
+                # Dependendo da tecla, altera o estado do jogador.
+                if evento.key == pygame.K_UP:
+                    santa.state = STILL
+    
+                elif evento.key == pygame.K_RIGHT:
+                    santa.state = WALKING
+                    santa.speedx += 3
+                elif evento.key == pygame.K_LEFT:
+                    santa.state = WALKING
+                    santa.speedx -=3
 
-        else:
-            if salto >= -10:
-                neg = 1
-                if salto < 0:
-                    neg = -1
-                y -= (salto**2) * 0.5 * neg
-                salto -= 1
-            else:
-                pulando = False
-                salto = 10
+            if evento.type == pygame.KEYUP:    
+                if evento.key == pygame.K_RIGHT:
+                    santa.state = WALKING
+                    santa.speedx -= 3
+                elif evento.key == pygame.K_LEFT:
+                    santa.state = WALKING
+                    santa.speedx +=3
+                elif evento.key == pygame.K_UP and santa.rect.centery == 600:
+                    santa.speedy = -10
+    
+
+        all_sprites.update()
+        all_sprites.draw(janela)
 
 
 if __name__ == '__main__':
