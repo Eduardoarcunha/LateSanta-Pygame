@@ -1,14 +1,14 @@
 import pygame
 import sys
 import os
-
+import random
 """
 
 O código da classe Background foi tirado do artigo do seguinte website:
 https://coderslegacy.com/python/pygame-scrolling-background/
 
 """
-GRAVITY = 5
+GRAVITY = 8
 WIDTH = 1100
 HEIGHT = 760
 STILL = 0
@@ -52,7 +52,7 @@ def load_spritesheet(spritesheet, rows, columns):
     # Calcula a largura e altura de cada sprite.
     sprite_width = spritesheet.get_width() // columns
     sprite_height = spritesheet.get_height() // rows
-    
+
     # Percorre todos os sprites adicionando em uma lista.
     sprites = []
     for row in range(rows):
@@ -74,10 +74,10 @@ class Santa(pygame.sprite.Sprite):
 
     # Construtor da classe. O argumento player_sheet é uma imagem contendo um spritesheet.
     def __init__(self, player_sheet):
-        
+
         # Construtor da classe pai (Sprite).
         pygame.sprite.Sprite.__init__(self)
-        
+
         # Aumenta o tamanho do spritesheet para ficar mais fácil de ver
         player_sheet = pygame.transform.scale(player_sheet, (300, 300))
 
@@ -99,7 +99,7 @@ class Santa(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.speedx = 0
         self.speedy = 0
-        
+
         # Centraliza na tela.
         self.rect.centerx = 80
         self.rect.centery = 600
@@ -109,7 +109,7 @@ class Santa(pygame.sprite.Sprite):
 
         # Controle de ticks de animação: troca de imagem a cada self.frame_ticks milissegundos.
         self.frame_ticks = 300
-        
+
     # Metodo que atualiza a posição do personagem
     def update(self):
 
@@ -120,16 +120,16 @@ class Santa(pygame.sprite.Sprite):
             self.rect.right = WIDTH
         if self.rect.left < 0:
             self.rect.left = 0
-        
+
 
         if self.rect.centery < 400:
             self.speedy += GRAVITY
-        
+
         if self.rect.centery >= 600:
             self.speedy = 0
             self.rect.centery = 600
 
-            
+
 
         # Verifica o tick atual.
         now = pygame.time.get_ticks()
@@ -151,7 +151,7 @@ class Santa(pygame.sprite.Sprite):
             # Reinicia a animação caso o índice da imagem atual seja inválido
             if self.frame >= len(self.animation):
                 self.frame = 0
-            
+
             # Armazena a posição do centro da imagem
             center = self.rect.center
             # Atualiza imagem atual
@@ -160,3 +160,22 @@ class Santa(pygame.sprite.Sprite):
             self.rect = self.image.get_rect()
             self.rect.center = center
 
+class Snowball(pygame.sprite.Sprite):
+
+    def __init__(self,img):
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = img
+        self.rect = self.image.get_rect()
+        self.rect.centerx = random.randint(WIDTH, WIDTH + 1500)
+        self.rect.centery = 600
+        self.speedx = random.randint(-8, -4)
+        self.speedy = 0
+
+    def update(self):
+        # Atualizando a posição do meteoro
+        self.rect.x += self.speedx
+        self.rect.y += self.speedy
+
+        if self.rect.centerx <= 0:
+            self.rect.centerx = random.randint(WIDTH, WIDTH + 1500)

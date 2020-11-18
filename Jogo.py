@@ -19,10 +19,11 @@ STILL = 0
 WALKING = 1
 
 # Inicialização padrão
-pygame.init() 
+pygame.init()
 janela = pygame.display.set_mode([WIDTH,HEIGHT]) # define uma surface ("janela" que o jogo será exibido)
 pygame.display.set_caption("Late Santa") # define um nome para a janela aberta
-
+snowball_img = pygame.image.load(os.path.join('Assets','Images', 'SnowBall.png')).convert_alpha()
+snowball_img = pygame.transform.scale(snowball_img, (80, 80))
 
 # Função principal do jogo
 def main():
@@ -30,16 +31,19 @@ def main():
     clock = pygame.time.Clock()
     FPS = 60
 
-    pulando = False
-    salto = 5
-
     #Carrega o player sheet e cria a sprite do Santa
     player_sheet = pygame.image.load(os.path.join('Assets','Images','Santa-light.png')).convert_alpha()
     santa = Santa(player_sheet)
 
     # Cria um grupo de todos os sprites e adiciona o jogador.
     all_sprites = pygame.sprite.Group()
+    all_snowballs = pygame.sprite.Group()
     all_sprites.add(santa)
+
+    for i in range(6):
+        snowball = Snowball(snowball_img)
+        all_sprites.add(snowball)
+        all_snowballs.add(snowball)
 
     # Game Loop
     game_on = True
@@ -64,26 +68,25 @@ def main():
 
             if evento.type == pygame.KEYDOWN:
                 # Dependendo da tecla, altera o estado do jogador.
-                if evento.key == pygame.K_UP:
-                    santa.state = STILL
-    
-                elif evento.key == pygame.K_RIGHT:
-                    santa.state = WALKING
-                    santa.speedx += 3
-                elif evento.key == pygame.K_LEFT:
-                    santa.state = WALKING
-                    santa.speedx -=3
 
-            if evento.type == pygame.KEYUP:    
                 if evento.key == pygame.K_RIGHT:
                     santa.state = WALKING
-                    santa.speedx -= 3
+                    santa.speedx += 10
                 elif evento.key == pygame.K_LEFT:
                     santa.state = WALKING
-                    santa.speedx +=3
-                elif evento.key == pygame.K_UP and santa.rect.centery == 600:
-                    santa.speedy = -10
-    
+                    santa.speedx -=10
+                elif evento.key == pygame.K_SPACE and santa.rect.centery == 600:
+                    santa.state = STILL
+                    santa.speedy -= 18
+
+            if evento.type == pygame.KEYUP:
+                if evento.key == pygame.K_RIGHT:
+                    santa.state = WALKING
+                    santa.speedx -= 10
+                elif evento.key == pygame.K_LEFT:
+                    santa.state = WALKING
+                    santa.speedx +=10
+
 
         all_sprites.update()
         all_sprites.draw(janela)
