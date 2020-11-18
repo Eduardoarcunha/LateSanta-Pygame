@@ -2,26 +2,19 @@ import pygame
 import sys
 import os
 import random
+from config import *
 """
 
 O código da classe Background foi tirado do artigo do seguinte website:
 https://coderslegacy.com/python/pygame-scrolling-background/
 
 """
-GRAVITY = 8
-WIDTH = 1100
-HEIGHT = 760
-STILL = 0
-WALKING = 1
 
 class Background:
     def __init__(self):
-        BACKGROUND = os.path.join('Assets','Images','BG_02.png')
-        try:
-            self.image = pygame.image.load(BACKGROUND).convert_alpha() # abre a imagem de fundo
-        except pygame.error:
-            print('Problema no load da imagem')
-            sys.exit()
+
+        self.image = pygame.image.load(BACKGROUND).convert_alpha() # abre a imagem de fundo
+
 
         self.rect = self.image.get_rect() # pega algumas informações de posição da imagem
 
@@ -95,6 +88,7 @@ class Santa(pygame.sprite.Sprite):
         # Inicializa o primeiro quadro da animação
         self.frame = 0
         self.image = self.animation[self.frame]
+        self.mask = pygame.mask.from_surface(self.image)
         # Detalhes sobre o posicionamento.
         self.rect = self.image.get_rect()
         self.speedx = 0
@@ -122,12 +116,13 @@ class Santa(pygame.sprite.Sprite):
             self.rect.left = 0
 
 
-        if self.rect.centery < 400:
+        if self.rect.centery < 600:
             self.speedy += GRAVITY
 
         if self.rect.centery >= 600:
             self.speedy = 0
             self.rect.centery = 600
+
 
 
 
@@ -166,6 +161,7 @@ class Snowball(pygame.sprite.Sprite):
         pygame.sprite.Sprite.__init__(self)
 
         self.image = img
+        self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = random.randint(WIDTH, WIDTH + 1500)
         self.rect.centery = 600
