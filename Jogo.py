@@ -4,11 +4,9 @@
 # Importando Bibliotecas
 import pygame
 import time 
-import sys
-import os
-from assets import *
-from classes import *
-from config import *
+from assets import load_assets, SANTALIGHT, HOHOHO_SOUND, JUMP_SOUND, EAT_SOUND, DEATH_SOUND
+from config import WIDTH, HEIGHT, FPS, WALKING
+from classes import Background, Santa, Snowball, Cookie
 
 # Inicialização padrão
 pygame.init()
@@ -21,10 +19,12 @@ pygame.display.set_caption("Late Santa") # define um nome para a janela aberta
 pygame.mixer.music.load('Assets/Sounds/SoundTrack.mp3')
 pygame.mixer.music.set_volume(0.1)
 
+game_on = True
+
 
 
 # Função principal do jogo
-def main():
+def game_screen(janela):
     pygame.mixer.music.play(loops =-1)
     background = Background() # cria o background usando a class Background (está no arquivo "classes")
     clock = pygame.time.Clock()
@@ -58,6 +58,7 @@ def main():
 
     # Game Loop
     game_on = True
+
     while game_on:
 
         pygame.time.delay(20)
@@ -123,6 +124,6 @@ def main():
             game_on = False
 
 
-if __name__ == '__main__':
-    main()
-    
+game_screen(janela)
+
+pygame.quit()

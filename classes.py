@@ -1,10 +1,8 @@
 import pygame
-import sys
 import os
 import random
-from assets import *
-from config import *
-from Jogo import *
+from assets import SNOWBALL_IMG, COOKIE_IMG
+from config import WIDTH, HEIGHT, GRAVITY, WALKING
 
 """
 

@@ -1,7 +1,6 @@
 import pygame
-import sys
 import os
-from config import *
+from config import DIAMETER_COOKIE, DIAMETER_SNOWBALL
 
 BACKGROUND = 'background'
 SNOWBALL_IMG = 'snowball_img'
