@@ -2,6 +2,7 @@ import pygame
 import sys
 import os
 import random
+from assets import *
 from config import *
 from Jogo import *
 
@@ -15,7 +16,7 @@ https://coderslegacy.com/python/pygame-scrolling-background/
 class Background:
     def __init__(self):
 
-        self.image = pygame.image.load(BACKGROUND).convert_alpha() # abre a imagem de fundo
+        self.image = pygame.image.load(os.path.join('Assets','Images','BG_02.png')).convert_alpha() # abre a imagem de fundo
 
 
         self.rect = self.image.get_rect() # pega algumas informações de posição da imagem
@@ -85,12 +86,11 @@ class Santa(pygame.sprite.Sprite):
         # Define sequências de sprites de cada animação
         spritesheet = load_spritesheet(player_sheet, 4, 3)
         self.animations = {
-            STILL: spritesheet[3:6],
             WALKING: spritesheet[3:6],
         }
 
         # Define estado atual (que define qual animação deve ser mostrada)
-        self.state = STILL
+        self.state = WALKING
         # Define animação atual
         self.animation = self.animations[self.state]
         # Inicializa o primeiro quadro da animação
@@ -160,10 +160,10 @@ class Santa(pygame.sprite.Sprite):
 
 class Snowball(pygame.sprite.Sprite):
 
-    def __init__(self,img):
+    def __init__(self,assets):
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = img
+        self.image = assets[SNOWBALL_IMG]
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = random.randint(WIDTH, WIDTH + 1500)
@@ -181,14 +181,14 @@ class Snowball(pygame.sprite.Sprite):
 
 class Cookie(pygame.sprite.Sprite):
 
-    def __init__(self,img):
+    def __init__(self,assets):
         pygame.sprite.Sprite.__init__(self)
 
-        self.image = img
+        self.image = assets[COOKIE_IMG]
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = random.randint(WIDTH, WIDTH + 1500)
-        self.rect.centery = random.randint(400, 600)
+        self.rect.centery = random.randint(400, 590)
         self.speedx = random.randint(-7,-5)
         self.speedy = 0
 

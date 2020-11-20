@@ -6,45 +6,51 @@ import pygame
 import time 
 import sys
 import os
+from assets import *
 from classes import *
 from config import *
 
 # Inicialização padrão
 pygame.init()
+pygame.mixer.init()
+
+
 janela = pygame.display.set_mode([WIDTH,HEIGHT]) # define uma surface ("janela" que o jogo será exibido)
 pygame.display.set_caption("Late Santa") # define um nome para a janela aberta
-snowball_img = pygame.image.load(os.path.join('Assets','Images', 'SnowBall.png')).convert_alpha()
-snowball_img = pygame.transform.scale(snowball_img, (DIAMETER_SNOWBALL, DIAMETER_SNOWBALL))
 
-cookie_img = pygame.image.load(os.path.join('Assets','Images', 'Cookie.png')).convert_alpha()
-cookie_img = pygame.transform.scale(cookie_img, (DIAMETER_COOKIE, DIAMETER_COOKIE))
-
-pygame.mixer.music.play(loops =-1)
+pygame.mixer.music.load('Assets/Sounds/SoundTrack.mp3')
+pygame.mixer.music.set_volume(0.1)
 
 
 
 # Função principal do jogo
 def main():
+    pygame.mixer.music.play(loops =-1)
     background = Background() # cria o background usando a class Background (está no arquivo "classes")
     clock = pygame.time.Clock()
 
-    #Carrega o player sheet e cria a sprite do Santa
-    player_sheet = pygame.image.load(SANTALIGHT).convert_alpha()
-    santa = Santa(player_sheet)
+    assets = load_assets()
 
-    # Cria um grupo de todos os sprites e adiciona o jogador.
-    all_cookies = pygame.sprite.Group()
-    all_snowballs = pygame.sprite.Group()
+    # Criando os grupos de sprites
     all_sprites = pygame.sprite.Group()
+    all_snowballs = pygame.sprite.Group()
+    all_cookies = pygame.sprite.Group()
+    groups = {}
+    groups['all_sprites'] = all_sprites
+    groups['all_snowballs'] = all_snowballs
+    groups['all_cookies'] = all_cookies
+
+    #Carrega o player sheet e cria a sprite do Santa
+    santa = Santa(assets[SANTALIGHT])
     all_sprites.add(santa)
 
     for i in range(8):
-        snowball = Snowball(snowball_img)
+        snowball = Snowball(assets)
         all_sprites.add(snowball)
         all_snowballs.add(snowball)
 
     for i in range(3):
-        cookie = Cookie(cookie_img)
+        cookie = Cookie(assets)
         all_sprites.add(cookie)
         all_cookies.add(cookie)
 
@@ -81,25 +87,20 @@ def main():
                 # Dependendo da tecla, altera o estado do jogador.
 
                 if evento.key == pygame.K_RIGHT:
-                    santa.state = WALKING
                     santa.speedx += 9
                 elif evento.key == pygame.K_LEFT:
-                    santa.state = WALKING
                     santa.speedx -= 9
                 elif evento.key == pygame.K_SPACE and santa.rect.centery == 600:
-                    santa.state = STILL
                     santa.speedy -= 14
-                    jump_sound.play()
+                    assets[JUMP_SOUND].play()
                 elif evento.key == pygame.K_h:
-                    hohoho_sound.play()
+                    assets[HOHOHO_SOUND].play()
 
 
             if evento.type == pygame.KEYUP:
                 if evento.key == pygame.K_RIGHT:
-                    santa.state = WALKING
                     santa.speedx -= 9
                 elif evento.key == pygame.K_LEFT:
-                    santa.state = WALKING
                     santa.speedx += 9
 
         score += 1
@@ -107,8 +108,8 @@ def main():
         #Colisão santa com cookies
         hits1 = pygame.sprite.spritecollide(santa,all_cookies , True, pygame.sprite.collide_mask)
         for e in hits1:
-            eat_sound.play()
-            cookie = Cookie(cookie_img)
+            assets[EAT_SOUND].play()
+            cookie = Cookie(assets)
             all_sprites.add(cookie)
             all_cookies.add(cookie)
             score += 200
@@ -117,7 +118,7 @@ def main():
         hits2 = pygame.sprite.spritecollide(santa,all_snowballs, False, pygame.sprite.collide_mask)
 
         if len(hits2) > 0:
-            death_sound.play()
+            assets[DEATH_SOUND].play()
             time.sleep(0.5)
             game_on = False
 
