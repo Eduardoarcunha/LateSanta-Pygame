@@ -165,7 +165,7 @@ class Snowball(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.centerx = random.randint(WIDTH, WIDTH + 1500)
         self.rect.centery = 600
-        self.speedx = random.randint(-8, -4)
+        self.speedx = random.randint(-12, -4)
         self.speedy = 0
 
     def update(self):

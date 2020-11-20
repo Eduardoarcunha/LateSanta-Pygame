@@ -3,6 +3,7 @@
 
 # Importando Bibliotecas
 import pygame
+import time 
 import sys
 import os
 from classes import *
@@ -14,6 +15,8 @@ janela = pygame.display.set_mode([WIDTH,HEIGHT]) # define uma surface ("janela" 
 pygame.display.set_caption("Late Santa") # define um nome para a janela aberta
 snowball_img = pygame.image.load(os.path.join('Assets','Images', 'SnowBall.png')).convert_alpha()
 snowball_img = pygame.transform.scale(snowball_img, (DIAMETER, DIAMETER))
+
+pygame.mixer.music.play(loops =-1)
 
 # Função principal do jogo
 def main():
@@ -60,26 +63,33 @@ def main():
 
                 if evento.key == pygame.K_RIGHT:
                     santa.state = WALKING
-                    santa.speedx += 7
+                    santa.speedx += 9
                 elif evento.key == pygame.K_LEFT:
                     santa.state = WALKING
-                    santa.speedx -=8
+                    santa.speedx -= 9
                 elif evento.key == pygame.K_SPACE and santa.rect.centery == 600:
                     santa.state = STILL
                     santa.speedy -= 14
+                    jump_sound.play()
+                elif evento.key == pygame.K_h:
+                    hohoho_sound.play()
+
 
             if evento.type == pygame.KEYUP:
                 if evento.key == pygame.K_RIGHT:
                     santa.state = WALKING
-                    santa.speedx -= 7
+                    santa.speedx -= 9
                 elif evento.key == pygame.K_LEFT:
                     santa.state = WALKING
-                    santa.speedx +=8
+                    santa.speedx += 9
+    
 
 
         hits = pygame.sprite.spritecollide(santa,all_snowballs, False, pygame.sprite.collide_mask)
 
         if len(hits) > 0:
+            death_sound.play()
+            time.sleep(0.5)
             game_on = False
 
         all_sprites.update()
