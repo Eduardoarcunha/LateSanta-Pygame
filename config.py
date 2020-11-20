@@ -13,8 +13,9 @@ WALKING = 1
 
 FPS = 60
 
-#Dimensões bola de neve
-DIAMETER = 80
+#Diâmetros
+DIAMETER_SNOWBALL = 80
+DIAMETER_COOKIE = 30
 
 #Estados controle aplicação
 INIT = 0
@@ -31,7 +32,8 @@ SANTALIGHT = os.path.join('Assets','Images','Santa-light.png')
 # Musicas
 pygame.mixer.init()
 pygame.mixer.music.load('Assets/Sounds/SoundTrack.mp3')
-pygame.mixer.music.set_volume(0.2)
+pygame.mixer.music.set_volume(0.1)
 hohoho_sound = pygame.mixer.Sound('Assets/Sounds/HoHoHo.mp3')
 death_sound = pygame.mixer.Sound('Assets/Sounds/Death.wav')
 jump_sound = pygame.mixer.Sound('Assets/Sounds/Jump.wav')
+eat_sound = pygame.mixer.Sound('Assets/Sounds/Eat.mp3')

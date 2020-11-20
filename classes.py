@@ -3,6 +3,8 @@ import sys
 import os
 import random
 from config import *
+from Jogo import *
+
 """
 
 O código da classe Background foi tirado do artigo do seguinte website:
@@ -33,9 +35,15 @@ class Background:
         if self.x2 <= - self.rect.width:
             self.x2 = self.rect.width
 
-    def render(self, surface): # função que "blita" as imagens na janela (surface)
+    def render(self, surface, score): # função que "blita" as imagens na janela (surface)
+        score_fnt = pygame.font.Font('Assets/Font/PressStart2P.ttf', 28)
+        text_surface = score_fnt.render("{:08d}".format(score), True, (220, 20, 60))
+        text_rect = text_surface.get_rect()
+        text_rect.midtop = (WIDTH / 2,  30)
+
         surface.blit(self.image, (self.x1, self.y1))
         surface.blit(self.image, (self.x2, self.y2))
+        surface.blit(text_surface, text_rect)
 
 
 
@@ -102,7 +110,7 @@ class Santa(pygame.sprite.Sprite):
         self.last_update = pygame.time.get_ticks()
 
         # Controle de ticks de animação: troca de imagem a cada self.frame_ticks milissegundos.
-        self.frame_ticks = 300
+        self.frame_ticks = 100
 
     # Metodo que atualiza a posição do personagem
     def update(self):
@@ -114,17 +122,12 @@ class Santa(pygame.sprite.Sprite):
             self.rect.right = WIDTH
         if self.rect.left < 0:
             self.rect.left = 0
-
-
         if self.rect.centery < 600:
             self.speedy += GRAVITY
 
         if self.rect.centery >= 600:
             self.speedy = 0
             self.rect.centery = 600
-
-
-
 
         # Verifica o tick atual.
         now = pygame.time.get_ticks()
@@ -175,3 +178,26 @@ class Snowball(pygame.sprite.Sprite):
 
         if self.rect.centerx <= 0:
             self.rect.centerx = random.randint(WIDTH, WIDTH + 1500)
+
+class Cookie(pygame.sprite.Sprite):
+
+    def __init__(self,img):
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = img
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+        self.rect.centerx = random.randint(WIDTH, WIDTH + 1500)
+        self.rect.centery = random.randint(400, 600)
+        self.speedx = random.randint(-7,-5)
+        self.speedy = 0
+
+    def update(self):
+        # Atualizando a posição do meteoro
+        self.rect.x += self.speedx
+        self.rect.y += self.speedy
+
+        if self.rect.centerx <= 0:
+            self.rect.centerx = random.randint(WIDTH, WIDTH + 1500)
+            self.rect.centery = random.randint(400, 600)
+            self.speedx = random.randint(-7,-5)
