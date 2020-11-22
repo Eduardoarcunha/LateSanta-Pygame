@@ -1,7 +1,7 @@
 import pygame
 import time
 from assets import load_assets, SANTALIGHT, HOHOHO_SOUND, JUMP_SOUND, EAT_SOUND, DEATH_SOUND
-from config import WIDTH, HEIGHT, WALKING, FPS
+from config import WIDTH, HEIGHT, WALKING, FPS, DEAD
 from classes import Background, Santa, Snowball, Cookie
 from init_screen import init_screen
 
@@ -109,3 +109,7 @@ def game_screen(janela):
             assets[DEATH_SOUND].play()
             time.sleep(0.5)
             game_on = False
+            state = DEAD
+            pygame.mixer.music.stop()
+    
+    return state
