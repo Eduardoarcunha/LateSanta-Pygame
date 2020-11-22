@@ -9,7 +9,7 @@ WALKING = 0
 #Estados controle aplicação
 INIT = 0
 GAME = 1
-EXIT = 2
+QUIT = 2
 
 #Frames per second
 FPS = 60

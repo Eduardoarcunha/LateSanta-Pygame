@@ -11,6 +11,9 @@ DEATH_SOUND = 'death_sound'
 JUMP_SOUND = 'jump_sound'
 EAT_SOUND = 'eat_sound'
 SANTALIGHT = 'santalight'
+INIT_FONT = 'init_font'
+SANTAHAT = 'santahat'
+SANTAFRONT = 'santafront'
 
 
 def load_assets():
@@ -22,9 +25,10 @@ def load_assets():
     assets[COOKIE_IMG] = pygame.image.load(os.path.join('Assets','Images', 'Cookie.png')).convert_alpha()
     assets[COOKIE_IMG] = pygame.transform.scale(assets['cookie_img'], (DIAMETER_COOKIE, DIAMETER_COOKIE))
     assets[SANTALIGHT] = pygame.image.load(os.path.join('Assets','Images','Santa-light.png')).convert_alpha()
+    assets[SANTAHAT] = pygame.image.load(os.path.join('Assets','Images','SantaHat.png')).convert_alpha()
+    assets[SANTAHAT] = pygame.transform.scale(assets['santahat'], (115, 80))
     assets[SCORE_FONT] = pygame.font.Font('Assets/Font/PressStart2P.ttf', 28)
-
-
+    assets[INIT_FONT] = pygame.font.Font('Assets/Font/PressStart2P.ttf', 28)
 
     assets[HOHOHO_SOUND] = pygame.mixer.Sound('Assets/Sounds/HoHoHo.mp3')
     assets[DEATH_SOUND] = pygame.mixer.Sound('Assets/Sounds/Death.wav')
