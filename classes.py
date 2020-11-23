@@ -1,3 +1,4 @@
+# Importando Bibliotecas
 import pygame
 import os
 import random
@@ -46,7 +47,7 @@ class Background:
 
 
 
-#Função para sprite sheets, adaptada do handout
+#Função para sprite sheets, adaptada do handout fornecida pelos professores
 
 def load_spritesheet(spritesheet, rows, columns):
     # Calcula a largura e altura de cada sprite.
@@ -70,6 +71,7 @@ def load_spritesheet(spritesheet, rows, columns):
             sprites.append(image)
     return sprites
 
+#Classe Santa
 class Santa(pygame.sprite.Sprite):
 
     # Construtor da classe. O argumento player_sheet é uma imagem contendo um spritesheet.
@@ -156,6 +158,7 @@ class Santa(pygame.sprite.Sprite):
             self.rect = self.image.get_rect()
             self.rect.center = center
 
+#Classe das bolas de neve
 class Snowball(pygame.sprite.Sprite):
 
     def __init__(self,assets):
@@ -177,6 +180,7 @@ class Snowball(pygame.sprite.Sprite):
         if self.rect.centerx <= 0:
             self.rect.centerx = random.randint(WIDTH, WIDTH + 1500)
 
+#Classe dos cookies
 class Cookie(pygame.sprite.Sprite):
 
     def __init__(self,assets):
@@ -186,7 +190,7 @@ class Cookie(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = random.randint(WIDTH, WIDTH + 1500)
-        self.rect.centery = random.randint(400, 590)
+        self.rect.centery = random.randint(400, 550)
         self.speedx = random.randint(-7,-5)
         self.speedy = 0
 
@@ -197,5 +201,5 @@ class Cookie(pygame.sprite.Sprite):
 
         if self.rect.centerx <= 0:
             self.rect.centerx = random.randint(WIDTH, WIDTH + 1500)
-            self.rect.centery = random.randint(400, 600)
+            self.rect.centery = random.randint(400, 550)
             self.speedx = random.randint(-7,-5)

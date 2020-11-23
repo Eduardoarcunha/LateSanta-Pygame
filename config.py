@@ -12,6 +12,11 @@ GAME = 1
 DEAD = 2
 QUIT = 3
 
+#Cores
+RED = (220, 20, 60)
+BLACK = (0, 0, 0)
+WHITE = (255, 255, 255)
+
 #Frames per second
 FPS = 60
 

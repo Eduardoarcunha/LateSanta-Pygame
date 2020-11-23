@@ -1,4 +1,4 @@
-#Projeto Final Dessoft
+#Projeto Final Dessoft - Late Santa
 #Alunos: Eduardo Araujo, Luísa Manzig, Renato Falcão
 
 # Importando Bibliotecas
@@ -16,14 +16,14 @@ pygame.init()
 pygame.mixer.init()
 
 
-janela = pygame.display.set_mode([WIDTH,HEIGHT]) # define uma surface ("janela" que o jogo será exibido)
-pygame.display.set_caption("Late Santa") # define um nome para a janela aberta
-
 # ----- Gera tela principal
 janela = pygame.display.set_mode([WIDTH,HEIGHT]) # define uma surface ("janela" que o jogo será exibido)
 pygame.display.set_caption("Late Santa") # define um nome para a janela aberta
 
+#Definindo recorde como 0
 record = 0 
+
+#Estado inicial: INIT
 state = INIT
 while state != QUIT:
     if state == INIT:

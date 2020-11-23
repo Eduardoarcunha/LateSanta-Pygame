@@ -1,3 +1,4 @@
+# Importando Bibliotecas
 import pygame
 import time
 from assets import load_assets, SANTALIGHT, HOHOHO_SOUND, JUMP_SOUND, EAT_SOUND, DEATH_SOUND
@@ -31,16 +32,19 @@ def game_screen(janela, record):
     santa = Santa(assets[SANTALIGHT])
     all_sprites.add(santa)
 
-    for i in range(8):
+    #Criando bolas de neve
+    for i in range(4):
         snowball = Snowball(assets)
         all_sprites.add(snowball)
         all_snowballs.add(snowball)
 
+    #Criando cookies
     for i in range(3):
         cookie = Cookie(assets)
         all_sprites.add(cookie)
         all_cookies.add(cookie)
 
+    #Score inicial
     score = 0
 
     # Game Loop
@@ -51,18 +55,19 @@ def game_screen(janela, record):
         pygame.time.delay(20)
         delta_time = clock.tick(FPS) # garante um FPS máximo
 
+        #Plano de fundo
         background.uptade(delta_time)
         background.render(janela,score)
-        all_sprites.draw(janela)
 
+        #Desenha todos os sprites
+        all_sprites.draw(janela)
+        all_sprites.update()
+
+        #Atualizando jogo
         pygame.display.flip()
         pygame.display.update()
 
         eventos = pygame.event.get()
-
-        all_sprites.update()
-        all_sprites.draw(janela)
-
 
         for evento in eventos:
             if evento.type == pygame.QUIT:
@@ -76,11 +81,14 @@ def game_screen(janela, record):
 
                 if evento.key == pygame.K_RIGHT:
                     santa.speedx += 9
+
                 elif evento.key == pygame.K_LEFT:
                     santa.speedx -= 9
+
                 elif evento.key == pygame.K_SPACE and santa.rect.centery == 600:
                     santa.speedy -= 14
                     assets[JUMP_SOUND].play()
+
                 elif evento.key == pygame.K_h:
                     assets[HOHOHO_SOUND].play()
 
@@ -88,14 +96,24 @@ def game_screen(janela, record):
             if evento.type == pygame.KEYUP:
                 if evento.key == pygame.K_RIGHT:
                     santa.speedx -= 9
+
                 elif evento.key == pygame.K_LEFT:
                     santa.speedx += 9
 
+        #Aumenta o score
         score += 1
+
+        #Aumentando e limitando a dificuldade do jogo
+        if score % 1000 == 0 and score != 0 and score <= 5000:
+            snowball = Snowball(assets)
+            all_sprites.add(snowball)
+            all_snowballs.add(snowball)
 
         #Colisão santa com cookies
         hits1 = pygame.sprite.spritecollide(santa,all_cookies , True, pygame.sprite.collide_mask)
-        for e in hits1:
+
+        #Caso o santa colida com as bolas
+        for hit in hits1:
             assets[EAT_SOUND].play()
             cookie = Cookie(assets)
             all_sprites.add(cookie)
