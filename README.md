@@ -6,13 +6,14 @@ Repositório do projeto final de Design de Software, o pygame
 
 # Comandos:
 RETURN = Jogar/Continuar
-SPACE = Pulo
+SPACE = Lançar gorro
 RIGHT_ARROW = Anda para a direita/frente
 LEFT_ARROW = Anda para a esquerda/trás
+UP_ARROW = Pulo
 H = Easter Egg
 
 # Jogo:
-O papai ta atrasado pra entregar os presentes, precisa comer cookies para ganhar energias, além de desviar das bolas de neve.
+O papai noel ta atrasado pra entregar os presentes, precisa comer cookies para ganhar energias, além de desviar das bolas de neve, ele consegue destruí-las com seu gorro.
 
 # Video:
 

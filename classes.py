@@ -2,7 +2,7 @@
 import pygame
 import os
 import random
-from assets import SNOWBALL_IMG, COOKIE_IMG
+from assets import SNOWBALL_IMG, COOKIE_IMG, THROW_SOUND, SNOW_SOUND, SANTAHAT2
 from config import WIDTH, HEIGHT, GRAVITY, WALKING
 
 """
@@ -75,7 +75,7 @@ def load_spritesheet(spritesheet, rows, columns):
 class Santa(pygame.sprite.Sprite):
 
     # Construtor da classe. O argumento player_sheet é uma imagem contendo um spritesheet.
-    def __init__(self, player_sheet):
+    def __init__(self, player_sheet,groups, assets):
 
         # Construtor da classe pai (Sprite).
         pygame.sprite.Sprite.__init__(self)
@@ -106,8 +106,13 @@ class Santa(pygame.sprite.Sprite):
         self.rect.centerx = 80
         self.rect.centery = 600
 
+        self.groups = groups
+        self.assets = assets
+
         # Guarda o tick da primeira imagem
         self.last_update = pygame.time.get_ticks()
+        self.last_throw = pygame.time.get_ticks()
+        self.throw_ticks = 1750
 
         # Controle de ticks de animação: troca de imagem a cada self.frame_ticks milissegundos.
         self.frame_ticks = 100
@@ -157,6 +162,46 @@ class Santa(pygame.sprite.Sprite):
             # Atualiza os detalhes de posicionamento
             self.rect = self.image.get_rect()
             self.rect.center = center
+
+    def throw(self):
+        # Verifica se pode lançar
+        now = pygame.time.get_ticks()
+        # Verifica quantos ticks se passaram desde o último gorro.
+        elapsed_ticks = now - self.last_throw
+
+        # Se já pode lançar novamente...
+        if elapsed_ticks > self.throw_ticks:
+            # Marca o tick da nova imagem.
+            self.last_throw = now
+            # O novo gorro vai ser criada no centro do santa
+            new_hat = Hat(self.assets, self.rect.centerx, self.rect.centery)
+            self.groups['all_sprites'].add(new_hat)
+            self.groups['all_hats'].add(new_hat)
+            self.assets[THROW_SOUND].play()
+
+class Hat(pygame.sprite.Sprite):
+    # Construtor da classe.
+    def __init__(self, assets, centerx, centery):
+        # Construtor da classe mãe (Sprite).
+        pygame.sprite.Sprite.__init__(self)
+
+        self.image = assets[SANTAHAT2]
+        self.mask = pygame.mask.from_surface(self.image)
+        self.rect = self.image.get_rect()
+
+        # Coloca no lugar inicial definido em x, y do constutor
+        self.rect.centerx = centerx
+        self.rect.centery = centery
+        self.speedx = 20  # Velocidade fixa para cima
+
+    def update(self):
+        # A bala só se move no eixo y
+        self.rect.x += self.speedx
+
+        # Se o lançamento passar do inicio da tela, morre.
+        if self.rect.centerx > WIDTH:
+            self.kill()
+
 
 #Classe das bolas de neve
 class Snowball(pygame.sprite.Sprite):
