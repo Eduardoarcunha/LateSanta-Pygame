@@ -23,14 +23,18 @@ pygame.display.set_caption("Late Santa") # define um nome para a janela aberta
 janela = pygame.display.set_mode([WIDTH,HEIGHT]) # define uma surface ("janela" que o jogo será exibido)
 pygame.display.set_caption("Late Santa") # define um nome para a janela aberta
 
+record = 0 
 state = INIT
 while state != QUIT:
     if state == INIT:
-        state = init_screen(janela)
+        state = init_screen(janela, record)
     elif state == GAME:
-        state = game_screen(janela)
+        returns = game_screen(janela, record)
+        state = returns[0]
+        score = returns[1]
+        record = returns[2]
     elif state == DEAD:
-        state = death_screen(janela)
+        state = death_screen(janela, score)
     else:
         state = QUIT
 

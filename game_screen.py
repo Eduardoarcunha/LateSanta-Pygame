@@ -6,7 +6,7 @@ from classes import Background, Santa, Snowball, Cookie
 from init_screen import init_screen
 
 # Função principal do jogo
-def game_screen(janela):
+def game_screen(janela, record):
 
     pygame.mixer.music.load('Assets/Sounds/SoundTrack.mp3')
     pygame.mixer.music.set_volume(0.1)
@@ -110,6 +110,8 @@ def game_screen(janela):
             time.sleep(0.5)
             game_on = False
             state = DEAD
+            if record < score:
+                record = score
             pygame.mixer.music.stop()
     
-    return state
+    return state, score, record

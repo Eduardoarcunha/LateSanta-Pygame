@@ -6,7 +6,7 @@ from config import WIDTH, HEIGHT, FPS, GAME, QUIT
 from classes import load_spritesheet
 
 
-def init_screen(janela):
+def init_screen(janela, record):
     # Variável para o ajuste de velocidade
     clock = pygame.time.Clock()
 
@@ -21,6 +21,12 @@ def init_screen(janela):
     text_rect.midtop = (WIDTH / 2,  50)
     background.blit(text_surface, text_rect)
 
+    record_fnt = pygame.font.Font('Assets/Font/PressStart2P.ttf', 40)
+    text_surface = record_fnt.render("BEST RUN: {}".format(record), True, (0, 0, 0))
+    text_rect = text_surface.get_rect()
+    text_rect.midtop = (WIDTH / 2,  HEIGHT - 60)
+    background.blit(text_surface, text_rect)
+
     assets = load_assets()
     background.blit(assets[SANTAHAT], (WIDTH - 220, 40))
 
@@ -31,7 +37,7 @@ def init_screen(janela):
     bottom_fnt = pygame.font.Font('Assets/Font/PressStart2P.ttf', 40)
     text_surface = bottom_fnt.render("PRESS ENTER TO START", True, (0,0,0))
     text_rect = text_surface.get_rect()
-    text_rect.midtop = (WIDTH / 2,  HEIGHT - 100)
+    text_rect.midtop = (WIDTH / 2,  HEIGHT - 110)
     background.blit(text_surface, text_rect)
 
     running = True
