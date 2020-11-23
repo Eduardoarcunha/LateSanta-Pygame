@@ -1,7 +1,7 @@
 # Importando Bibliotecas
 import pygame
 import time
-from assets import load_assets, SANTALIGHT, HOHOHO_SOUND, JUMP_SOUND, EAT_SOUND, DEATH_SOUND
+from assets import load_assets, SANTALIGHT, HOHOHO_SOUND, JUMP_SOUND, EAT_SOUND, DEATH_SOUND, SNOW_SOUND
 from config import WIDTH, HEIGHT, WALKING, FPS, DEAD
 from classes import Background, Santa, Snowball, Cookie
 from init_screen import init_screen
@@ -23,13 +23,16 @@ def game_screen(janela, record):
     all_sprites = pygame.sprite.Group()
     all_snowballs = pygame.sprite.Group()
     all_cookies = pygame.sprite.Group()
+    all_hats = pygame.sprite.Group()
+    
     groups = {}
     groups['all_sprites'] = all_sprites
     groups['all_snowballs'] = all_snowballs
     groups['all_cookies'] = all_cookies
+    groups['all_hats'] = all_hats
 
     #Carrega o player sheet e cria a sprite do Santa
-    santa = Santa(assets[SANTALIGHT])
+    santa = Santa(assets[SANTALIGHT],groups,assets)
     all_sprites.add(santa)
 
     #Criando bolas de neve
@@ -85,7 +88,10 @@ def game_screen(janela, record):
                 elif evento.key == pygame.K_LEFT:
                     santa.speedx -= 9
 
-                elif evento.key == pygame.K_SPACE and santa.rect.centery == 600:
+                elif evento.key == pygame.K_SPACE:
+                        santa.throw()
+
+                elif evento.key == pygame.K_UP and santa.rect.centery == 600:
                     santa.speedy -= 14
                     assets[JUMP_SOUND].play()
 
@@ -104,7 +110,7 @@ def game_screen(janela, record):
         score += 1
 
         #Aumentando e limitando a dificuldade do jogo
-        if score % 1000 == 0 and score != 0 and score <= 5000:
+        if score % 1000 == 0 and score != 0 and score <= 8000:
             snowball = Snowball(assets)
             all_sprites.add(snowball)
             all_snowballs.add(snowball)
@@ -120,10 +126,20 @@ def game_screen(janela, record):
             all_cookies.add(cookie)
             score += 200
 
-        #Colisão santa com bolas de neve
-        hits2 = pygame.sprite.spritecollide(santa,all_snowballs, False, pygame.sprite.collide_mask)
+        #Colisão santa com cookies
+        hits2 = pygame.sprite.groupcollide(all_hats,all_snowballs , True, True, pygame.sprite.collide_mask)
 
-        if len(hits2) > 0:
+        if len(hits2) >0:
+            assets[SNOW_SOUND].play()
+            for hit in hits2:
+                snowball = Snowball(assets)
+                all_sprites.add(snowball)
+                all_snowballs.add(snowball)
+
+        #Colisão santa com bolas de neve
+        hits3 = pygame.sprite.spritecollide(santa,all_snowballs, False, pygame.sprite.collide_mask)
+
+        if len(hits3) > 0:
             assets[DEATH_SOUND].play()
             time.sleep(0.5)
             game_on = False
@@ -132,4 +148,5 @@ def game_screen(janela, record):
                 record = score
             pygame.mixer.music.stop()
     
+    #Retorna o estado, a pontuação e o recorde atual
     return state, score, record

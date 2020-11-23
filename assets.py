@@ -11,6 +11,7 @@ COOKIE_IMG = 'cookie_img'
 #Imagens tela inicial
 SANTALIGHT = 'santalight'
 SANTAHAT = 'santahat'
+SANTAHAT2 = 'santahat2'
 SANTAFRONT = 'santafront'
 
 #Fontes
@@ -26,6 +27,8 @@ HOHOHO_SOUND = 'hohoho_sound'
 DEATH_SOUND = 'death_sound'
 JUMP_SOUND = 'jump_sound'
 EAT_SOUND = 'eat_sound'
+SNOW_SOUND = 'snow_sound'
+THROW_SOUND = 'throw_sound'
 
 def load_assets():
     assets = {}
@@ -40,6 +43,7 @@ def load_assets():
     assets[SANTALIGHT] = pygame.image.load(os.path.join('Assets','Images','Santa-light.png')).convert_alpha()
     assets[SANTAHAT] = pygame.image.load(os.path.join('Assets','Images','SantaHat.png')).convert_alpha()
     assets[SANTAHAT] = pygame.transform.scale(assets['santahat'], (115, 80))
+    assets[SANTAHAT2] = pygame.transform.scale(assets['santahat'], (60, 50))
 
     #Fontes
     assets[SCORE_FNT] = pygame.font.Font('Assets/Font/PressStart2P.ttf', 28)
@@ -54,5 +58,7 @@ def load_assets():
     assets[DEATH_SOUND] = pygame.mixer.Sound('Assets/Sounds/Death.wav')
     assets[JUMP_SOUND] = pygame.mixer.Sound('Assets/Sounds/Jump.wav')
     assets[EAT_SOUND] = pygame.mixer.Sound('Assets/Sounds/Eat.mp3')
+    assets[SNOW_SOUND] = pygame.mixer.Sound('Assets/Sounds/Snow_Breaking.mp3')
+    assets[THROW_SOUND] = pygame.mixer.Sound('Assets/Sounds/Throw.wav')
 
     return assets
