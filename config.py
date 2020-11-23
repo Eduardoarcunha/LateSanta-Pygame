@@ -8,9 +8,10 @@ WALKING = 0
 
 #Estados controle aplicação
 INIT = 0
-GAME = 1
-DEAD = 2
-QUIT = 3
+CHOOSE = 1
+GAME = 2
+DEAD = 3
+QUIT = 4
 
 #Cores
 RED = (220, 20, 60)

@@ -1,13 +1,13 @@
 # Importando Bibliotecas
 import pygame
 import time
-from assets import load_assets, SANTALIGHT, HOHOHO_SOUND, JUMP_SOUND, EAT_SOUND, DEATH_SOUND, SNOW_SOUND
+from assets import load_assets, SANTALIGHT, SANTABLACK, HOHOHO_SOUND, JUMP_SOUND, EAT_SOUND, DEATH_SOUND, SNOW_SOUND
 from config import WIDTH, HEIGHT, WALKING, FPS, DEAD
 from classes import Background, Santa, Snowball, Cookie
 from init_screen import init_screen
 
 # Função principal do jogo
-def game_screen(janela, record):
+def game_screen(janela, record, sprite_jogo):
 
     pygame.mixer.music.load('Assets/Sounds/SoundTrack.mp3')
     pygame.mixer.music.set_volume(0.1)
@@ -24,7 +24,7 @@ def game_screen(janela, record):
     all_snowballs = pygame.sprite.Group()
     all_cookies = pygame.sprite.Group()
     all_hats = pygame.sprite.Group()
-    
+
     groups = {}
     groups['all_sprites'] = all_sprites
     groups['all_snowballs'] = all_snowballs
@@ -32,7 +32,7 @@ def game_screen(janela, record):
     groups['all_hats'] = all_hats
 
     #Carrega o player sheet e cria a sprite do Santa
-    santa = Santa(assets[SANTALIGHT],groups,assets)
+    santa = Santa(assets[sprite_jogo],groups,assets)
     all_sprites.add(santa)
 
     #Criando bolas de neve
@@ -147,6 +147,6 @@ def game_screen(janela, record):
             if record < score:
                 record = score
             pygame.mixer.music.stop()
-    
+
     #Retorna o estado, a pontuação e o recorde atual
     return state, score, record

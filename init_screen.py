@@ -1,8 +1,8 @@
 # Importando Bibliotecas
 import pygame
 import os
-from assets import load_assets, INIT_FNT, TITLE_FNT, RECORD_FNT, SANTALIGHT, SANTAHAT
-from config import WIDTH, HEIGHT, FPS, GAME, QUIT, BLACK, RED
+from assets import load_assets, INIT_FNT, TITLE_FNT, RECORD_FNT, SANTALIGHT, SANTABLACK, SANTAHAT
+from config import WIDTH, HEIGHT, FPS, GAME, QUIT, CHOOSE, BLACK, RED
 from classes import load_spritesheet
 
 #Função tela inicial
@@ -71,9 +71,8 @@ def init_screen(janela, record):
 
                 # Verifica se return foi apertado
                 if event.key == pygame.K_RETURN:
-                    #Para a musica de entrada, define o estado como GAME
-                    pygame.mixer.music.stop()
-                    state = GAME
+                    #Define o estado como CHOOSE
+                    state = CHOOSE
                     running = False
 
         # A cada loop, redesenha o fundo e os sprites

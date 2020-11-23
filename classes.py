@@ -246,5 +246,5 @@ class Cookie(pygame.sprite.Sprite):
 
         if self.rect.centerx <= 0:
             self.rect.centerx = random.randint(WIDTH, WIDTH + 1500)
-            self.rect.centery = random.randint(400, 550)
+            self.rect.centery = random.randint(400, 500)
             self.speedx = random.randint(-7,-5)

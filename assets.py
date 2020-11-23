@@ -10,6 +10,7 @@ COOKIE_IMG = 'cookie_img'
 
 #Imagens tela inicial
 SANTALIGHT = 'santalight'
+SANTABLACK = 'santablack'
 SANTAHAT = 'santahat'
 SANTAHAT2 = 'santahat2'
 SANTAFRONT = 'santafront'
@@ -19,6 +20,9 @@ INIT_FNT = 'init_fnt'
 TITLE_FNT = 'title_fnt'
 SCORE_FNT = 'score_fnt'
 RECORD_FNT = 'record_fnt'
+CHOOSE_FNT = 'choose_fnt'
+TITLE_CHOOSE_FNT = 'title_choose_fnt'
+ENTER_FNT = 'enter_fnt'
 GAMEOVER_FNT = 'gameover_fnt'
 RESULT_FNT = 'result_fnt'
 
@@ -41,6 +45,7 @@ def load_assets():
 
     #Imagens tela inicial
     assets[SANTALIGHT] = pygame.image.load(os.path.join('Assets','Images','Santa-light.png')).convert_alpha()
+    assets[SANTABLACK] = pygame.image.load(os.path.join('Assets','Images','Santa-black.png')).convert_alpha()
     assets[SANTAHAT] = pygame.image.load(os.path.join('Assets','Images','SantaHat.png')).convert_alpha()
     assets[SANTAHAT] = pygame.transform.scale(assets['santahat'], (115, 80))
     assets[SANTAHAT2] = pygame.transform.scale(assets['santahat'], (60, 50))
@@ -50,6 +55,9 @@ def load_assets():
     assets[INIT_FNT] = pygame.font.Font('Assets/Font/PressStart2P.ttf', 28)
     assets[TITLE_FNT] = pygame.font.Font('Assets/Font/PressStart2P.ttf', 65)
     assets[RECORD_FNT] = pygame.font.Font('Assets/Font/PressStart2P.ttf', 40)
+    assets[CHOOSE_FNT] = pygame.font.Font('Assets/Font/PressStart2P.ttf', 20)
+    assets[TITLE_CHOOSE_FNT] = pygame.font.Font('Assets/Font/PressStart2P.ttf', 30)
+    assets[ENTER_FNT] = pygame.font.Font('Assets/Font/PressStart2P.ttf', 25)
     assets[GAMEOVER_FNT] = pygame.font.Font('Assets/Font/PressStart2P.ttf', 55)
     assets[RESULT_FNT] = pygame.font.Font('Assets/Font/PressStart2P.ttf', 20)
 

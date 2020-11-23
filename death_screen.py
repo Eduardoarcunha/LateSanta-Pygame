@@ -1,13 +1,14 @@
 # Importando Bibliotecas
 import pygame
 from config import WIDTH, HEIGHT, INIT, QUIT, BLACK, WHITE, RED
-from assets import load_assets, INIT_FNT, GAMEOVER_FNT, RESULT_FNT
+from assets import load_assets, INIT_FNT, GAMEOVER_FNT, RESULT_FNT, ENTER_FNT
 
 #Função telad de morte
 def death_screen(janela, score):
     assets = load_assets()
     gameover_fnt = assets[GAMEOVER_FNT]
     result_fnt = assets[RESULT_FNT]
+    enter_fnt = assets[ENTER_FNT]
 
     #Preenche a janela de preto
     janela.fill(BLACK)
@@ -22,10 +23,17 @@ def death_screen(janela, score):
     result_rect = result_surface.get_rect()
     result_rect.midtop = (WIDTH/2,  HEIGHT/ 1.5 )
 
+    #Colocando indicar
+    enter_surface = enter_fnt.render("PRESS ENTER TO GO BACK", True, WHITE)
+    enter_rect = enter_surface.get_rect()
+    enter_rect.midtop = (WIDTH / 2,  HEIGHT - 110)
+    janela.blit(enter_surface, enter_rect)
+
+
     #Atualizando janela
     janela.blit(gameover_surface, gameover_rect)
     janela.blit(result_surface, result_rect)
-    
+
     running = True
     while running:
 
