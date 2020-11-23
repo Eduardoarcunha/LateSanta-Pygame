@@ -36,7 +36,7 @@ while state != QUIT:
         sprite_jogo = returns[1]
 
     elif state == GAME:
-        returns = game_screen(janela, record)
+        returns = game_screen(janela, record, sprite_jogo)
         state = returns[0]
         score = returns[1]
         record = returns[2]
