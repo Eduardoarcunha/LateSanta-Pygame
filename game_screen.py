@@ -36,7 +36,7 @@ def game_screen(janela, record, sprite_jogo):
     all_sprites.add(santa)
 
     #Criando bolas de neve
-    for i in range(4):
+    for i in range(3):
         snowball = Snowball(assets)
         all_sprites.add(snowball)
         all_snowballs.add(snowball)
@@ -115,11 +115,18 @@ def game_screen(janela, record, sprite_jogo):
             all_sprites.add(snowball)
             all_snowballs.add(snowball)
 
+        
+        #Premiando o jogador com mais cookies
+        if score % 5000 == 0 and score != 0 and score <= 10000:
+            cookie = Cookie(assets)
+            all_sprites.add(cookie)
+            all_cookies.add(cookie)
+
         #Colisão santa com cookies
-        hits1 = pygame.sprite.spritecollide(santa,all_cookies , True, pygame.sprite.collide_mask)
+        hits_santa_cookies = pygame.sprite.spritecollide(santa,all_cookies , True, pygame.sprite.collide_mask)
 
         #Caso o santa colida com as bolas
-        for hit in hits1:
+        for hit in hits_santa_cookies:
             assets[EAT_SOUND].play()
             cookie = Cookie(assets)
             all_sprites.add(cookie)
@@ -127,19 +134,19 @@ def game_screen(janela, record, sprite_jogo):
             score += 200
 
         #Colisão santa com cookies
-        hits2 = pygame.sprite.groupcollide(all_hats,all_snowballs , True, True, pygame.sprite.collide_mask)
+        hits_hats_snowballs = pygame.sprite.groupcollide(all_hats,all_snowballs , True, True, pygame.sprite.collide_mask)
 
-        if len(hits2) >0:
+        if len(hits_hats_snowballs) >0:
             assets[SNOW_SOUND].play()
-            for hit in hits2:
+            for hit in hits_hats_snowballs:
                 snowball = Snowball(assets)
                 all_sprites.add(snowball)
                 all_snowballs.add(snowball)
 
         #Colisão santa com bolas de neve
-        hits3 = pygame.sprite.spritecollide(santa,all_snowballs, False, pygame.sprite.collide_mask)
+        hits_santa_snowballs = pygame.sprite.spritecollide(santa,all_snowballs, False, pygame.sprite.collide_mask)
 
-        if len(hits3) > 0:
+        if len(hits_santa_snowballs) > 0:
             assets[DEATH_SOUND].play()
             time.sleep(0.5)
             game_on = False

@@ -12,7 +12,6 @@ def choose_screen(janela):
 
     #Importanto assets
     assets = load_assets()
-    title_fnt = assets[TITLE_FNT]
     escolha_fnt = assets[CHOOSE_FNT]
     title_choose_fnt = assets[TITLE_CHOOSE_FNT]
 

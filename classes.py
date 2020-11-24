@@ -192,7 +192,7 @@ class Hat(pygame.sprite.Sprite):
         # Coloca no lugar inicial definido em x, y do constutor
         self.rect.centerx = centerx
         self.rect.centery = centery
-        self.speedx = 20  # Velocidade fixa para cima
+        self.speedx = 15  # Velocidade fixa para direita
 
     def update(self):
         # A bala só se move no eixo y
@@ -214,7 +214,7 @@ class Snowball(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.centerx = random.randint(WIDTH, WIDTH + 1500)
         self.rect.centery = 600
-        self.speedx = random.randint(-12, -4)
+        self.speedx = random.randint(-12, -5)
         self.speedy = 0
 
     def update(self):
@@ -235,7 +235,7 @@ class Cookie(pygame.sprite.Sprite):
         self.mask = pygame.mask.from_surface(self.image)
         self.rect = self.image.get_rect()
         self.rect.centerx = random.randint(WIDTH, WIDTH + 1500)
-        self.rect.centery = random.randint(400, 550)
+        self.rect.centery = random.randint(400, 500)
         self.speedx = random.randint(-7,-5)
         self.speedy = 0
 
