@@ -5,6 +5,8 @@ from assets import load_assets, INIT_FNT, GAMEOVER_FNT, RESULT_FNT, ENTER_FNT
 
 #Função telad de morte
 def death_screen(janela, score):
+    
+    #Carregando fontes
     assets = load_assets()
     gameover_fnt = assets[GAMEOVER_FNT]
     result_fnt = assets[RESULT_FNT]

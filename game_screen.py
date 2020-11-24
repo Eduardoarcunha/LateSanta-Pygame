@@ -155,5 +155,7 @@ def game_screen(janela, record, sprite_jogo):
                 record = score
             pygame.mixer.music.stop()
 
+    retornos = [state,score,record]
+    
     #Retorna o estado, a pontuação e o recorde atual
-    return state, score, record
+    return retornos

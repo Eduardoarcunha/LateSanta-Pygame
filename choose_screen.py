@@ -2,11 +2,12 @@
 import pygame
 import os
 from assets import load_assets, INIT_FNT, TITLE_FNT, RECORD_FNT, CHOOSE_FNT, TITLE_CHOOSE_FNT, SANTALIGHT, SANTABLACK, SANTAHAT
-from config import WIDTH, HEIGHT, FPS, GAME, QUIT, BLACK, RED
+from config import WIDTH, HEIGHT, FPS, GAME, QUIT, BLACK, RED, SANTA_SCREEN
 from classes import load_spritesheet
 
 #Função tela inicial
 def choose_screen(janela):
+
     # Variável para o ajuste de velocidade
     clock = pygame.time.Clock()
 
@@ -17,9 +18,10 @@ def choose_screen(janela):
 
     #Imagem dos santas para escolher
     santa_light = load_spritesheet(assets[SANTALIGHT],4,3)
-    santa_light[7] = pygame.transform.scale(santa_light[7], (90, 90))
+    santa_light[7] = pygame.transform.scale(santa_light[7], SANTA_SCREEN)
+
     santa_black = load_spritesheet(assets[SANTABLACK],4,3)
-    santa_black[7] = pygame.transform.scale(santa_black[7], (90, 90))
+    santa_black[7] = pygame.transform.scale(santa_black[7], SANTA_SCREEN)
 
     #Colocando tela de fundo
     background = pygame.image.load(os.path.join('Assets','Images','BG_01.png')).convert()
@@ -27,7 +29,7 @@ def choose_screen(janela):
     background_rect = background.get_rect()
 
     #Colocando Título
-    title_choose_surface = title_choose_fnt.render("ESCOLHA O SEU PERSONAGEM", True, RED)
+    title_choose_surface = title_choose_fnt.render("CHOOSE YOUR CHARACTER", True, RED)
     title_choose_rect = title_choose_surface.get_rect()
     title_choose_rect.midtop = (WIDTH / 2,  50)
     background.blit(title_choose_surface, title_choose_rect)
@@ -37,7 +39,7 @@ def choose_screen(janela):
     background.blit(santa_black[7], (WIDTH*3/4, HEIGHT/2))
 
     #Colocando texto da escolha
-    escolha_surface = escolha_fnt.render("Aperte < ou >", True, BLACK)
+    escolha_surface = escolha_fnt.render("PRESS < OR >", True, BLACK)
     escolha_rect = escolha_surface.get_rect()
     escolha_rect.midtop = (WIDTH / 2,  HEIGHT/2 + 45)
     background.blit(escolha_surface, escolha_rect)
