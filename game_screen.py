@@ -42,7 +42,7 @@ def game_screen(janela, record, sprite_jogo):
         all_snowballs.add(snowball)
 
     #Criando cookies
-    for i in range(3):
+    for i in range(2):
         cookie = Cookie(assets)
         all_sprites.add(cookie)
         all_cookies.add(cookie)
@@ -110,14 +110,14 @@ def game_screen(janela, record, sprite_jogo):
         score += 1
 
         #Aumentando e limitando a dificuldade do jogo
-        if score % 1000 == 0 and score != 0 and score <= 8000:
+        if len(all_snowballs) < 3 + score/2000 and score <= 10000:
             snowball = Snowball(assets)
             all_sprites.add(snowball)
             all_snowballs.add(snowball)
 
         
         #Premiando o jogador com mais cookies
-        if score % 5000 == 0 and score != 0 and score <= 10000:
+        if len(all_cookies) < 2 + score/5000 and score <= 10000:
             cookie = Cookie(assets)
             all_sprites.add(cookie)
             all_cookies.add(cookie)
@@ -136,7 +136,7 @@ def game_screen(janela, record, sprite_jogo):
         #Colisão santa com cookies
         hits_hats_snowballs = pygame.sprite.groupcollide(all_hats,all_snowballs , True, True, pygame.sprite.collide_mask)
 
-        if len(hits_hats_snowballs) >0:
+        if len(hits_hats_snowballs) > 0:
             assets[SNOW_SOUND].play()
             for hit in hits_hats_snowballs:
                 snowball = Snowball(assets)
