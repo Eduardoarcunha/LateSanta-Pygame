@@ -1,22 +1,20 @@
-# LATE SANTA
-Repositório do projeto final de Design de Software, jogo utilizando a biblioteca **Pygame**.
-## Alunos: Eduardo Cunha, Luisa Kyrillos, Renato Laffranchi
-## Turma: 1A
-## Data: 25/11/2020
+# Pygame-Dessoft-Eduardo-Luisa-Renato
+Repositório do projeto final de Design de Software, o pygame
+# Alunos: Eduardo Cunha, Luisa Kyrillos, Renato Laffranchi
+# Turma: 1A
+# Data: 25/11/2020
 
-### Jogo:
-O Papai Noel está atrasado para entregar os presentes de Natal, então ele precisa correr para entregá-los! Ele pode comer cookies pelo caminho para ganhar pontos e, além de desviar das bolas de neve, ele pode destruí-las com seu gorro!
+# Comandos:
+RETURN = Jogar/Continuar
+SPACE = Lançar gorro
+RIGHT_ARROW = Anda para a direita/frente
+LEFT_ARROW = Anda para a esquerda/trás
+UP_ARROW = Pulo
+H = Easter Egg
 
-A inicialização do jogo se dá no arquivo **Jogo.py**.
+# Jogo:
+O papai noel ta atrasado pra entregar os presentes, precisa comer cookies para ganhar energias, além de desviar das bolas de neve, ele consegue destruí-las com seu gorro.
 
-### Comandos:
-- RETURN/ENTER = Jogar/Continuar;
-- SPACE = Lançar gorro;
-- RIGHT_ARROW = Anda para a direita;
-- LEFT_ARROW = Anda para a esquerda;
-- UP_ARROW = Pulo;
-- H = **Easter Egg**
+# Video:
+https://www.youtube.com/watch?v=0icbqPWkbHY&feature=youtu.be
 
-### Video:
-
-Esse é o link para o *[vídeo](https://www.youtube.com/watch?v=0icbqPWkbHY&feature=youtu.be&ab_channel=EduardoCunha)* da apresentação do jogo.
