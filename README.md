@@ -1,5 +1,5 @@
-# Pygame-Dessoft-Eduardo-Luisa-Renato
-Repositório do projeto final de Design de Software, o pygame
+# LATE SANTA
+Repositório do projeto final de Design de Software, jogo utilizando a biblioteca **Pygame**.
 ## Alunos: Eduardo Cunha, Luisa Kyrillos, Renato Laffranchi
 ## Turma: 1A
 ## Data: 25/11/2020
