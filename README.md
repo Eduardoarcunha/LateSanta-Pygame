@@ -19,4 +19,4 @@ A inicialização do jogo se dá no arquivo **Jogo.py**.
 
 ### Video:
 
-Esse é o link para o *[vídeo](https://www.youtube.com/watch?v=0icbqPWkbHY&feature=youtu.be&ab_channel=EduardoCunha)* da apresentação do jogo. 
+Esse é o link para o *[vídeo](https://www.youtube.com/watch?v=0icbqPWkbHY&feature=youtu.be&ab_channel=EduardoCunha)* da apresentação do jogo.
