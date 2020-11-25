@@ -12,7 +12,7 @@ COOKIE_IMG = 'cookie_img'
 SANTALIGHT = 'santalight'
 SANTABLACK = 'santablack'
 SANTAHAT = 'santahat'
-SANTAHAT_GAME = 'santahat_game'
+SANTAHAT2 = 'santahat2'
 SANTAFRONT = 'santafront'
 
 #Fontes
@@ -48,7 +48,7 @@ def load_assets():
     assets[SANTABLACK] = pygame.image.load(os.path.join('Assets','Images','Santa-black.png')).convert_alpha()
     assets[SANTAHAT] = pygame.image.load(os.path.join('Assets','Images','SantaHat.png')).convert_alpha()
     assets[SANTAHAT] = pygame.transform.scale(assets['santahat'], (115, 80))
-    assets[SANTAHAT_GAME] = pygame.transform.scale(assets['santahat'], (60, 50))
+    assets[SANTAHAT2] = pygame.transform.scale(assets['santahat'], (60, 50))
 
     #Fontes
     assets[SCORE_FNT] = pygame.font.Font('Assets/Font/PressStart2P.ttf', 28)

@@ -31,13 +31,11 @@ while state != QUIT:
         state = init_screen(janela, record)
 
     elif state == CHOOSE:
-        #Recebe o estado do jogo e o sprite escolhido pelo jogador
         returns = choose_screen(janela)
         state = returns[0]
         sprite_jogo = returns[1]
 
     elif state == GAME:
-        #Recebe o estado do jogo, o score e o record
         returns = game_screen(janela, record, sprite_jogo)
         state = returns[0]
         score = returns[1]

@@ -2,7 +2,8 @@
 WIDTH = 1100
 HEIGHT = 760
 
-#Estados possíveis sprite jogador
+
+#Estados possíveis jogador
 WALKING = 0
 
 #Estados controle aplicação
@@ -20,10 +21,9 @@ WHITE = (255, 255, 255)
 #Frames per second
 FPS = 60
 
-#Dimensões
+#Diâmetros
 DIAMETER_SNOWBALL = 80
 DIAMETER_COOKIE = 30
-SANTA_SCREEN = (90,90)
 
 #Gravidade
 GRAVITY = 0.7
