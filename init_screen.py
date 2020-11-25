@@ -2,7 +2,7 @@
 import pygame
 import os
 from assets import load_assets, INIT_FNT, TITLE_FNT, RECORD_FNT, SANTALIGHT, SANTABLACK, SANTAHAT
-from config import WIDTH, HEIGHT, FPS, GAME, QUIT, CHOOSE, BLACK, RED
+from config import WIDTH, HEIGHT, FPS, GAME, QUIT, CHOOSE, BLACK, RED, SANTA_SCREEN
 from classes import load_spritesheet
 
 #Função tela inicial
@@ -23,7 +23,7 @@ def init_screen(janela, record):
 
     #Imagem do santa
     santas = load_spritesheet(assets[SANTALIGHT],4,3)
-    santas[7] = pygame.transform.scale(santas[7], (90, 90))
+    santas[7] = pygame.transform.scale(santas[7], SANTA_SCREEN)
 
     #Colocando tela de fundo
     background = pygame.image.load(os.path.join('Assets','Images','BG_01.png')).convert()
@@ -42,7 +42,7 @@ def init_screen(janela, record):
     record_rect.midtop = (WIDTH / 2,  HEIGHT - 60)
     background.blit(record_surface, record_rect)
 
-    #Colocando indicar
+    #Colocando indicação para começar o jogo
     enter_surface = bottom_fnt.render("PRESS ENTER TO START", True, BLACK)
     enter_rect = enter_surface.get_rect()
     enter_rect.midtop = (WIDTH / 2,  HEIGHT - 110)
