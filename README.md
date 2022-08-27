@@ -1,4 +1,4 @@
-# Pygame-Dessoft-Eduardo-Luisa-Renato
+# Late Santa
 
 Feito por Eduardo Cunha, Luisa Kyrillos, Renato Laffranchi
 
