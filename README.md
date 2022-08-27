@@ -16,4 +16,4 @@ Late Santa é um endless platformer no qual o Papai Noel se atrasou no natal e p
 - UP_ARROW = Pulo
 - H = Easter Egg
 
-### [Exemplo](https://www.youtube.com/watch?v=0icbqPWkbHY&feature=youtu.be)
+### [Vídeo de gameplay](https://www.youtube.com/watch?v=0icbqPWkbHY&feature=youtu.be)
